@@ -24,26 +24,12 @@ class Paper {
 
         this.velX = this.touchMoveX - this.prevTouchX;
         this.velY = this.touchMoveY - this.prevTouchY;
-      }
 
-      const dirX = (e.clientX || e.touches[0].clientX) - this.touchStartX;
-      const dirY = (e.clientY || e.touches[0].clientY) - this.touchStartY;
-      const dirLength = Math.sqrt(dirX * dirX + dirY * dirY);
-      const dirNormalizedX = dirX / dirLength;
-      const dirNormalizedY = dirY / dirLength;
-
-      const angle = Math.atan2(dirNormalizedY, dirNormalizedX);
-      let degrees = 180 * angle / Math.PI;
-      degrees = (360 + Math.round(degrees)) % 360;
-      if (this.rotating) {
-        this.rotation = degrees;
-      }
-
-      if (this.holdingPaper) {
-        if (!this.rotating) {
+        if (this.holdingPaper) {
           this.currentPaperX += this.velX;
           this.currentPaperY += this.velY;
         }
+
         this.prevTouchX = this.touchMoveX;
         this.prevTouchY = this.touchMoveY;
 
@@ -58,12 +44,10 @@ class Paper {
       paper.style.zIndex = highestZ;
       highestZ += 1;
 
-      if (e.pointerType === 'touch') {
-        this.touchStartX = e.touches[0].clientX;
-        this.touchStartY = e.touches[0].clientY;
-        this.prevTouchX = this.touchStartX;
-        this.prevTouchY = this.touchStartY;
-      }
+      this.touchStartX = e.clientX || e.touches[0].clientX;
+      this.touchStartY = e.clientY || e.touches[0].clientY;
+      this.prevTouchX = this.touchStartX;
+      this.prevTouchY = this.touchStartY;
     });
 
     paper.addEventListener('pointerup', () => {
