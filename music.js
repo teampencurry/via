@@ -7,13 +7,12 @@ window.addEventListener('DOMContentLoaded', (event) => {
     const musicFilePath = "music/indila.mp3";
 
     audio.src = musicFilePath;
-    audio.volume = 0.3; // Mengatur volume awal menjadi 30%
+    audio.volume = 0.3;
 
     let isPlaying = false;
     let isMobile = false;
 
-    // Cek apakah pengguna mengakses halaman melalui perangkat mobile
-    if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)){
+    if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
         isMobile = true;
     }
 
@@ -21,7 +20,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
     papperElem.addEventListener('click', togglePlayStop);
 
     if (isMobile) {
-        papperElem.addEventListener('touchstart', startMusic);
+        papperElem.addEventListener('touchend', handleMobileTouch);
+        papperElem.addEventListener('touchmove', handleMobileTouch);
     }
 
     volumeSlider.addEventListener('input', () => {
@@ -38,20 +38,34 @@ window.addEventListener('DOMContentLoaded', (event) => {
                 .catch((error) => {
                     console.log("Tidak dapat memutar musik: ", error);
                 });
+        } else {
+            audio.pause();
+            playStopBtn.innerHTML = '<i class="fas fa-play"></i>';
+            isPlaying = false;
         }
     }
 
-    function startMusic() {
-        if (isMobile && !isPlaying) {
+    function handleMobileTouch(event) {
+        event.preventDefault();
+        if (!isPlaying) {
             audio.play()
                 .then(() => {
                     playStopBtn.innerHTML = '<i class="fas fa-stop"></i>';
                     isPlaying = true;
-                    papperElem.removeEventListener('touchstart', startMusic);
                 })
                 .catch((error) => {
                     console.log("Tidak dapat memutar musik: ", error);
                 });
+        } else {
+            audio.pause();
+            playStopBtn.innerHTML = '<i class="fas fa-play"></i>';
+            isPlaying = false;
         }
     }
+
+    // Matikan musik saat halaman ditutup
+    window.addEventListener('beforeunload', () => {
+        audio.pause();
+        audio.currentTime = 0;
+    });
 });
