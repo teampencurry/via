@@ -84,3 +84,12 @@ p {
   align-items: center;
 }
 
+#music-controls {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+}
+
+#play-stop-btn {
+  margin-right: 10px;
+}
