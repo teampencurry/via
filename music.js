@@ -10,10 +10,19 @@ window.addEventListener('DOMContentLoaded', (event) => {
     audio.volume = 0.3; // Mengatur volume awal menjadi 30%
 
     let isPlaying = false;
+    let isMobile = false;
+
+    // Cek apakah pengguna mengakses halaman melalui perangkat mobile
+    if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)){
+        isMobile = true;
+    }
 
     playStopBtn.addEventListener('click', togglePlayStop);
     papperElem.addEventListener('click', togglePlayStop);
-    papperElem.addEventListener('touchstart', togglePlayStop);
+
+    if (isMobile) {
+        papperElem.addEventListener('touchstart', startMusic);
+    }
 
     volumeSlider.addEventListener('input', () => {
         audio.volume = volumeSlider.value / 100;
@@ -25,6 +34,20 @@ window.addEventListener('DOMContentLoaded', (event) => {
                 .then(() => {
                     playStopBtn.innerHTML = '<i class="fas fa-stop"></i>';
                     isPlaying = true;
+                })
+                .catch((error) => {
+                    console.log("Tidak dapat memutar musik: ", error);
+                });
+        }
+    }
+
+    function startMusic() {
+        if (isMobile && !isPlaying) {
+            audio.play()
+                .then(() => {
+                    playStopBtn.innerHTML = '<i class="fas fa-stop"></i>';
+                    isPlaying = true;
+                    papperElem.removeEventListener('touchstart', startMusic);
                 })
                 .catch((error) => {
                     console.log("Tidak dapat memutar musik: ", error);
