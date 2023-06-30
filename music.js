@@ -40,7 +40,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
                 });
         } else {
             audio.pause();
-            playStopBtn.innerHTML = '<i class="fas fa-stop"></i>';
+            playStopBtn.innerHTML = '<i class="fas fa-play"></i>';
+            isPlaying = false;
         }
     }
 
@@ -57,7 +58,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
                 });
         } else {
             audio.pause();
-            playStopBtn.innerHTML = '<i class="fas fa-stop"></i>';
+            playStopBtn.innerHTML = '<i class="fas fa-play"></i>';
+            isPlaying = false;
         }
     }
 
