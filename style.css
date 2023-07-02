@@ -89,7 +89,7 @@ p {
 }
 
 #music-controls {
-  position: sticky;
+  position: fixed;
   bottom: 20px;
   left: 45%;
   z-index: 9999; /* tambahkan z-index untuk memastikan elemen berada di atas konten lain */
