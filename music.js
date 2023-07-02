@@ -4,7 +4,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
     const volumeSlider = document.getElementById("volume-slider");
     const papperElem = document.querySelector(".papper");
 
-    const musicFilePath = "music/indila.mp3";
+    const musicFilePath = "music/Indila.mp3";
 
     audio.src = musicFilePath;
     audio.volume = 0.3;
