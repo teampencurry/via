@@ -89,12 +89,13 @@ p {
 }
 
 #music-controls {
-  margin-bottom: 20px;
+  position: sticky;
+  bottom: 20px;
+  left: 45%;
+  z-index: 9999; /* tambahkan z-index untuk memastikan elemen berada di atas konten lain */
 }
 
-.content {
-  flex: 1;
-}
+
 #play-stop-btn {
   margin-right: 10px;
 }
