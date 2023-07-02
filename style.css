@@ -89,11 +89,15 @@ p {
 
 
 #music-controls {
-  position: fixed;
   bottom: 20px;
   left: 45%;
 }
-
+#music-controls {
+    position: sticky;
+    top: 0;
+    z-index: 999;
+    background-color: #ffffff;
+  }
 #play-stop-btn {
   margin-right: 10px;
 }
