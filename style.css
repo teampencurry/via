@@ -55,7 +55,6 @@ img {
 
 .paper.heart::after {
   content: "";
-  background-image: url ('images/Dandelions.png');
   width: 100%;
   height: 100%;
   position: absolute;
