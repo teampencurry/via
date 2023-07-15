@@ -17,6 +17,7 @@ body {
   background-size: 300px;
   background-position: center center;
   padding: 20px 100px;
+ 	
 /*  min-width: 800px; */
   
   transform: rotateZ(-5deg);
@@ -98,3 +99,6 @@ p {
 #play-stop-btn {
   margin-right: 10px;
 }
+.line  { text-decoration: line-through; }
+
+
