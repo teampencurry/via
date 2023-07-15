@@ -100,5 +100,5 @@ p {
   margin-right: 10px;
 }
 .line  { text-decoration: line-through; }
-
+.all   { text-decoration: underline overline line-through; }
 
